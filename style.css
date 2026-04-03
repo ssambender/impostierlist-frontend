@@ -150,6 +150,38 @@ input:focus {
 }
 
 
+
+/* server connection */
+
+#connectionOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 11, 30, 0.95);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+#connectionOverlay h2 {
+    font-family: 'New Era Casual', cursive;
+    color: #C9C9E4;
+    margin-bottom: 10px;
+}
+
+#countdownText {
+    font-size: 2rem;
+    color: var(--color-y);
+    font-weight: bold;
+}
+
+
 /* =========================================
    LAYOUT WRAPPERS & MENUS
 ========================================= */
