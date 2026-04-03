@@ -259,7 +259,9 @@
         let votingForName = '';
         let playerColors = {};
 
-        const socket = io('http://localhost:8080');
+        const socketURL = "https://written-platypus-sambender-4bd0fa8c.koyeb.app";
+        const socket = io(socketURL);
+        // const socket = io('http://localhost:8080');
 
         socket.on('connect', () => console.log('Connected to the server'));
 
