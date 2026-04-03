@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Impostierlist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="favicon.png">
+</head>
+
+<body>
+    
+    <div id="footerSB"><a href="https://sambender.net" target="_blank" style="font-family: 'New Era Casual', cursive; color: #C9C9E4;">Sam Bender 2026</a></div>
+
+    <div class="landingWrapper" style="display: flex;">
+        <div class="imgWrapper">
+            <img src="impostierlistLong.png">
+        </div>
+        <div class="menuGroup">
+            <button class="hostjoinbutton" onclick="landingHostGame()" style="margin-bottom: 20px; font-family: 'New Era Casual', cursive;">HOST GAME</button>
+            <button class="hostjoinbutton" onclick="landingJoinGame()" style="font-family: 'New Era Casual', cursive;">JOIN GAME</button>
+        </div>
+    </div>
+
+    <div class="menuWrapper">
+        <div class="menuGroup" id="hostGameGroup">
+            <img src="hostGameLong.png">
+            <div class="menuGroupInputLabel">
+                <span class="menuGroupInputLabelText" style="font-family: 'New Era Casual', cursive;">Username</span>
+                <input id="usernameInputHost" type="text" maxlength="10" placeholder="ENTER NAME" autocomplete="off" style="text-transform: none; font-family: 'New Era Casual', cursive;">
+            </div>
+            <button id="createLobbyButton" onclick="createNewRoom()" style="font-family: 'New Era Casual', cursive;">CREATE LOBBY</button>
+            <button class="backButton" onclick="returnToLanding()"><——</button>
+        </div>
+        <div class="menuGroup" id="joinGameGroup">
+            <img src="joinGameLong.png">
+            <div class="menuGroupInputLabel">
+                <span class="menuGroupInputLabelText" style="font-family: 'New Era Casual', cursive;">Room Code</span>
+                <input id="roomCodeInput" type="text" maxlength="4" placeholder="Enter 4-Digit code" autocomplete="off" style="font-family: 'New Era Casual', cursive;">
+            </div>
+            <div class="menuGroupInputLabel">
+                <span class="menuGroupInputLabelText" style="font-family: 'New Era Casual', cursive;">Username</span>
+                <input id="usernameInput" type="text" maxlength="10" placeholder="ENTER NAME" autocomplete="off" style="text-transform: none; font-family: 'New Era Casual', cursive;">
+            </div>
+            <button id="joinRoomButton" onclick="attemptJoinroom()" style="font-family: 'New Era Casual', cursive;">JOIN ROOM!</button>
+            <button class="backButton" onclick="returnToLanding()"><——</button>
+        </div>
+    </div>
+
+    <div id="tierListWrapper">
+        <div id="tierListContainer">
+            <div id="preventDrag"></div>
+            <div id="tierListTopBar">
+                Example prompt here, maybe some more text.
+            </div>
+            <div id="tierListSortingSec">
+                <div class="tierListSortingHalf" id="tierListSorted">
+                    <div class="sortingRow" id="srL1">
+                        <span class="tierLetter" style="background-color: var(--color-r);">S</span>
+                        <div id="answer1holder" class="optionHolder"></div>
+                    </div>
+                    <div class="sortingRow" id="srL2">
+                        <span class="tierLetter" style="background-color: var(--color-o);">A</span>
+                        <div id="answer2holder" class="optionHolder"></div>
+                    </div>
+                    <div class="sortingRow" id="srL3">
+                        <span class="tierLetter" style="background-color: var(--color-y);">B</span>
+                        <div id="answer3holder" class="optionHolder"></div>
+                    </div>
+                    <div class="sortingRow" id="srL4">
+                        <span class="tierLetter" style="background-color: var(--color-g);">C</span>
+                        <div id="answer4holder" class="optionHolder"></div>
+                    </div>
+                    <div class="sortingRow" id="srL5">
+                        <span class="tierLetter" style="background-color: var(--color-b);">D</span>
+                        <div id="answer5holder" class="optionHolder"></div>
+                    </div>
+                    <div class="sortingRow" id="srL6">
+                        <span class="tierLetter" style="background-color: var(--color-i);">E</span>
+                        <div id="answer6holder" class="optionHolder"></div>
+                    </div>
+                    <div class="sortingRow" id="srL7">
+                        <span class="tierLetter" style="background-color: var(--color-v);">F</span>
+                        <div id="answer7holder" class="optionHolder"></div>
+                    </div>
+                </div>
+
+                <div class="tierListSortingHalf" id="tierListToSort">
+                    <div class="sortingRow" id="srR1">
+                        <div class="optionHolder"><div id="draggableWord1" class="draggableWord">OPTION 1</div></div>
+                    </div>
+                    <div class="sortingRow" id="srR2">
+                        <div class="optionHolder"><div id="draggableWord2" class="draggableWord">OPTION 2</div></div>
+                    </div>
+                    <div class="sortingRow" id="srR3">
+                        <div class="optionHolder"><div id="draggableWord3" class="draggableWord">OPTION 3</div></div>
+                    </div>
+                    <div class="sortingRow" id="srR4">
+                        <div class="optionHolder"><div id="draggableWord4" class="draggableWord">OPTION 4</div></div>
+                    </div>
+                    <div class="sortingRow" id="srR5">
+                        <div class="optionHolder"><div id="draggableWord5" class="draggableWord">OPTION 5</div></div>
+                    </div>
+                    <div class="sortingRow" id="srR6">
+                        <div class="optionHolder"><div id="draggableWord6" class="draggableWord">OPTION 6</div></div>
+                    </div>
+                    <div class="sortingRow" id="srR7">
+                        <div class="optionHolder"><div id="draggableWord7" class="draggableWord">OPTION 7</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tierListActionButtons" style="display: flex; gap: 15px; justify-content: center; width: 100%; max-width: 400px; margin: 0 auto;">
+            <button id="resetTierList" onclick="resetTierList()" style="background-color: var(--color-r);">RESET</button>
+            <button id="submitTierList">SUBMIT</button>
+        </div>
+        <div id="tierListSubmittedWait" style="display: none;">Tier list submitted, sit tight...</div>
+    </div>
+
+    <div id="tierResultsWrapper">
+        <div id="tierResultsContainer">
+            <div id="realPromptRevealContainer">
+                <span id="realPromptLabel">REAL PROMPT:</span>
+                <span id="realPromptText">Prompt HerePrompt Here Prompt Here Prompt Here Prompt Here</span>
+            </div>
+            <div id="tierResultsTitle"><span id="playerListName" style="text-transform: capitalize; font-family: inherit; font-size: inherit; letter-spacing: inherit;">Player</span>'s Tier List</div>
+            <div id="tierResults">
+                <div id="tierBox">
+                    <button onclick="changeTierList(-1)" style="padding: 12px 16px;">🢀</button>
+                    <div id="tierBoxInner">
+                        <div class="tierBoxRow">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-r);">S</div>
+                            <span id="tierBoxRowAnswer1" style="color: var(--color-r);">Answer1</span>
+                        </div>
+                        <div class="tierBoxRow">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-o);">A</div>
+                            <span id="tierBoxRowAnswer2" style="color: var(--color-o);">Answer2</span>
+                        </div>
+                        <div class="tierBoxRow">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-y);">B</div>
+                            <span id="tierBoxRowAnswer3" style="color: var(--color-y);">Answer3</span>
+                        </div>
+                        <div class="tierBoxRow" id="tierBoxRow4">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-g);">C</div>
+                            <span id="tierBoxRowAnswer4" style="color: var(--color-g);">Answer4</span>
+                        </div>
+                        <div class="tierBoxRow" id="tierBoxRow5">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-b);">D</div>
+                            <span id="tierBoxRowAnswer5" style="color: var(--color-b);">Answer5</span>
+                        </div>
+                        <div class="tierBoxRow" id="tierBoxRow6">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-i);">E</div>
+                            <span id="tierBoxRowAnswer6" style="color: var(--color-i);">Answer6</span>
+                        </div>
+                        <div class="tierBoxRow" id="tierBoxRow7">
+                            <div class="tierBoxRowLet" style="background-color: var(--color-v);">F</div>
+                            <span id="tierBoxRowAnswer7" style="color: var(--color-v);">Answer7</span>
+                        </div>
+                    </div>
+                    <button onclick="changeTierList(1)" style="padding: 12px 16px;">🢂</button>
+                </div>
+                <button id="voteNameAsImpostor" onclick="voteForUser()" disabled style="opacity: 0.5; cursor: default;">VOTE <span id="voteForName" style="text-transform: uppercase; font-family: inherit; letter-spacing: inherit; color: inherit;">NaMENAMENA</span> AS IMPOSTOR</button>
+                <div id="votedConfirmationText" style="display: none; color: var(--text-muted); font-weight: bold; font-size: 1.2rem; margin-top: 15px; text-align: center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="votingResultsWrapper" style="display: none; flex-direction: column; align-items: center; width: 100%; max-width: 800px; margin-top: 40px; background-color: var(--bg-panel); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h1 id="winnerAnnouncement" style="font-size: 2.5rem; margin-bottom: 10px; text-align: center;"></h1>
+        <h2 id="impostorReveal" style="color: var(--color-r); margin-bottom: 30px; text-align: center;"></h2>
+        
+        <div id="impostorPromptContainer" style="width: 100%; max-width: 600px; margin-bottom: 30px; padding: 15px; background-color: rgba(0,0,0,0.2); border-radius: 8px; border: 1px dashed rgba(255,255,255,0.1); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 5px; font-family: 'New Era Casual', cursive; letter-spacing: 0.05rem;">THEIR FAKE PROMPT WAS:</div>
+            <div id="impostorPromptText" style="color: #C9C9E4; font-size: 1.2rem; font-weight: bold;"></div>
+        </div>
+
+        <div style="width: 100%; border-top: 2px dashed rgba(255,255,255,0.1); margin-bottom: 20px;"></div>
+        
+        <h3 style="margin-bottom: 15px; color: var(--text-muted); font-family: 'New Era Casual', cursive; letter-spacing: 0.07rem; font-size: 1.5rem;">VOTE BREAKDOWN:</h3>
+        <div id="voteBreakdownList" style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; font-size: 1.2rem;"></div>
+
+        <div style="width: 100%; border-top: 2px dashed rgba(255,255,255,0.1); margin-bottom: 20px;"></div>
+
+        <h3 style="margin-bottom: 15px; color: var(--text-muted); font-family: 'New Era Casual', cursive; letter-spacing: 0.07rem; font-size: 1.5rem;">SCOREBOARD:</h3>
+        <div id="scoreboardList" style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; font-size: 1.2rem;"></div>
+
+        <button id="playAgainButton" style="width: 100%; max-width: 300px; margin-bottom: 10px;">NEXT ROUND</button>
+        <span id="waitingForHostText" style="display: none; color: var(--text-muted); font-weight: bold;">Waiting for host to continue...</span>
+    </div>
+
+    <div id="finalResultsWrapper" style="display: none; flex-direction: column; align-items: center; width: 100%; max-width: 800px; margin-top: 40px; background-color: var(--bg-panel); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h1 id="finalWinnerName" style="font-size: 2.5rem; margin-bottom: 10px; text-align: center; color: var(--color-g);"></h1>
+        <h2 style="color: var(--text-muted); margin-bottom: 30px; text-align: center;">FINAL SCORES</h2>
+        
+        <div id="finalScoreboardList" style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; font-size: 1.2rem;"></div>
+
+        <div style="width: 100%; border-top: 2px dashed rgba(255,255,255,0.1); margin-bottom: 20px;"></div>
+        
+        <h3 style="margin-bottom: 15px; color: var(--text-muted); font-family: 'New Era Casual', cursive; letter-spacing: 0.07rem; font-size: 1.5rem;">PROMPT HISTORY:</h3>
+        <div id="finalPromptHistory" style="width: 100%; display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; font-size: 1.1rem; line-height: 1.4;"></div>
+
+        <div style="display: flex; gap: 15px; width: 100%; justify-content: center; margin-top: 10px;">
+            <button onclick="leaveGame()" style="background-color: var(--bg-body); border: 2px solid var(--accent); color: var(--text-main);">BACK TO MENU</button>
+            <button id="finalPlayAgainBtn" onclick="playAgainSameLobby()" style="display: none;">PLAY AGAIN</button>
+        </div>
+        <span id="finalWaitingText" style="display: none; color: var(--text-muted); font-weight: bold; margin-top:15px;">Waiting for host to continue...</span>
+    </div>
+
+    <div class="joinedroomPleaseWaitWrapper">
+        <span id="nameOfroomWaiting" style="font-family: 'New Era Casual', cursive;"></span>
+        <span style="color: #60487a; font-family: 'New Era Casual', cursive;">Joined room, please wait...</span>
+        <div id="playersInLobby">
+            <span id="inLobbyLabel">
+                <span>IN LOBBY:</span>
+                <span id="playersInLobbySize">1/7</span>
+            </span>
+            <div id="playersInLobbyList"></div>
+            <div id="customNamesSection" style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <span style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; font-family: 'New Era Casual', cursive;">Add extra names (personalized mode):</span>
+                <div style="display: flex; gap: 5px; width: 100%; justify-content: center;">
+                    <input id="customNameInput" type="text" maxlength="15" placeholder="Name" style="width: 60%; padding: 8px; font-family: 'New Era Casual', cursive;">
+                    <button onclick="addCustomName()" style="padding: 8px 15px; font-family: 'New Era Casual', cursive;">ADD</button>
+                </div>
+                <div id="customNamesList" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; justify-content: center;"></div>
+            </div>
+            <div id="everyoneInButtonContainer" style="display: none; flex-direction: column;">
+                <span style="margin-top: 20px; margin-bottom: 5px; color: #60487a; text-align: center;">
+                    Everyone in?
+                </span>
+                <div style="display: flex; justify-content: space-between;">
+                    <button id="everyoneInButton" onclick="everyoneIn(false)" style="width: 48%;">
+                        Regular
+                    </button>
+                    <button id="everyoneInButton2" onclick="everyoneIn(true)" style="width: 48%;">
+                        Personalized
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100vw; display: flex; justify-content: center;">
+            <div style="margin-top: 40px;">
+                <button id="copyGameCodeButton" onclick="copyRoomURL()" style="font-family: 'New Era Casual', cursive;">Copy room URL link!</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script>
+        let roomCode = '';
+        let meHost = false;         
+        let myUsername = "Guest";
+        let hostUsername = "Host";
+        let isInGame = false;      
+        let numOfAnswers = 7;       
+        let canDrag = true;         
+        let votingForName = '';
+        let playerColors = {};
+
+        const socket = io('http://localhost:8080');
+
+        socket.on('connect', () => console.log('Connected to the server'));
+
+        socket.on('lobbyCreated', (data) => {
+            socket.emit('join', { roomCode: data.roomCode, username: data.username });
+            document.getElementById('everyoneInButtonContainer').style.display = 'flex';
+            roomCode = data.roomCode.toUpperCase();
+        });
+
+        socket.on('joinedLobby', (data) => confirmedJoinLobby(data.roomCode, data.username));
+        socket.on('lobbyDoesntExist', () => { alertPopup("Room not found!"); document.getElementById('roomCodeInput').value = ""; });
+        socket.on('lobbyFull', () => alertPopup("Room already full!"));
+        socket.on('lobbyInProgress', () => alertPopup("Room already in progress!"));
+        socket.on('notEnoughPlayers', () => alertPopup("Need at least 3 players to start!"));
+        socket.on('nameTaken', () => alertPopup("Cannot join, name already taken!"));
+
+        // UPDATE PLAYERS IN CURRENT LOBBY
+        socket.on('updateLobbyPlayers', (data) => {
+            const playersData = data.players;
+            meHost = false;
+
+            const userListHTML = playersData.map((playerObj, index) => {
+                let displayName = playerObj.username;
+                playerColors[playerObj.username] = playerObj.color;
+
+                if (index === 0) {
+                    displayName = '' + displayName + '*';
+                    if (playerObj.username === myUsername) meHost = true;
+                }
+                if (playerObj.username === myUsername) displayName += ' (ME)';
+                
+                return `<span style="color: ${playerObj.color};">${displayName}</span>`;
+            }).join('<br>');
+            
+            document.querySelector('#playersInLobbyList').innerHTML = userListHTML;
+            document.querySelector('#playersInLobbySize').innerText = playersData.length.toString() + '/7';
+            
+            const startBtnContainer = document.querySelector('#everyoneInButtonContainer');
+            if (meHost && playersData.length > 2) {
+                startBtnContainer.style.display = 'flex';
+                startBtnContainer.style.visibility = "visible";
+            } else {
+                startBtnContainer.style.display = 'none';
+            }
+        });
+
+        // UPDATE CUSTOM NAMES (PERSONALIZED MODE   )
+        socket.on('updateCustomNames', (names) => {
+            const listDiv = document.getElementById('customNamesList');
+            listDiv.innerHTML = names.map(n => 
+                `<span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; color: #C9C9E4; display: inline-flex; align-items: center; gap: 6px;">
+                    ${n}
+                    <span onclick="removeCustomName('${n}')" style="cursor: pointer; color: var(--bg-panel); font-weight: bold; background: var(--accent); padding: 2px 5px !important; border-radius: 25px !important;">✖</span>
+                    </span>`
+                ).join('');
+            });
+
+        // SHOW/UPDATE NEW TIERLIST
+        socket.on('newTierlistData', (data) => {
+            resetForNextRound();
+            newTierListData(data.prompt, data.possibleAnswers);
+        });
+
+        // EVERYONE SUBMITTED, CONTINUE
+        socket.on('everyoneSubmitted', (data) => {
+            allListsSubmitted(data.submissions, data.realPrompt);
+        });
+
+        // VOTING COMPLETE, SHOW RESULTS
+        socket.on('votingComplete', (data) => {
+            showVotingResults(data.guesses, data.impostor, data.roundScores, data.totalScores, data.scoreBreakdowns, data.round, data.fakePrompt);
+        });
+
+        // RESET TO LOBBY, RELOAD
+        socket.on('resetToLobby', () => {
+            window.location.reload(); 
+        });
+
+        // SHOW FINAL RESULTS
+        socket.on('showFinalResults', (data) => {
+            document.querySelector('#votingResultsWrapper').style.display = 'none';
+            document.querySelector('#finalResultsWrapper').style.display = 'flex';
+            
+            // calculate winner
+            let sortedPlayers = Object.keys(data.totalScores).sort((a, b) => data.totalScores[b] - data.totalScores[a]);
+            let maxScore = data.totalScores[sortedPlayers[0]];
+            let winners = sortedPlayers.filter(p => data.totalScores[p] === maxScore);
+            
+            document.querySelector('#finalWinnerName').innerText = winners.length > 1 ? "TIE FOR 1ST PLACE!" : `${winners[0]} WINS!`;
+            
+            // scoreboard
+            let scoreboardHTML = "";
+            sortedPlayers.forEach((player, index) => {
+                let highlightMe = player === myUsername ? 'border: solid 2px var(--accent);' : '';
+                let pColor = playerColors[player] || 'white';
+                scoreboardHTML += `<div style="background-color: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; ${highlightMe}">
+                    <strong>${index + 1}. <span style="color: ${pColor};">${player}</span></strong>
+                    <span>${data.totalScores[player]} pts</span>
+                </div>`;
+            });
+            document.querySelector('#finalScoreboardList').innerHTML = scoreboardHTML;
+            
+            // previous rounds prompts history
+            let historyHTML = "";
+            data.promptHistory.forEach(ph => {
+                historyHTML += `<div style="background-color: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.1);">
+                    <div style="color: var(--accent); font-weight: bold; margin-bottom: 5px;">ROUND ${ph.round}</div>
+                    <div style="margin-bottom: 5px;"><strong style="color: var(--color-g);">REAL:</strong> ${ph.real}</div>
+                    <div><strong style="color: var(--color-r);">FAKE:</strong> ${ph.fake}</div>
+                </div>`;
+            });
+            document.querySelector('#finalPromptHistory').innerHTML = historyHTML;
+            
+            // show play again buttons to host
+            if (meHost) {
+                document.querySelector('#finalPlayAgainBtn').style.display = 'block';
+                document.querySelector('#finalWaitingText').style.display = 'none';
+            } else {
+                document.querySelector('#finalPlayAgainBtn').style.display = 'none';
+                document.querySelector('#finalWaitingText').style.display = 'block';
+            }
+        });
+
+        // BACK TO LOBBY WAITING SCREEN (AFTER HOST CLICKS PLAY AGAIN)
+        socket.on('backToLobbyWaiting', () => {
+            document.querySelector('#finalResultsWrapper').style.display = 'none';
+            document.querySelector('.joinedroomPleaseWaitWrapper').style.display = 'flex';
+            
+            if (meHost) {
+                document.querySelector('#everyoneInButtonContainer').style.display = 'flex';
+                document.querySelector('#everyoneInButtonContainer').style.visibility = 'visible';
+            }
+        });
+
+
+        // URL QUERY PARAMS
+        const queryString = window.location.search;
+        if (queryString.includes('room')) {
+            const baseUrl = window.location.href.split('?')[0];
+            history.replaceState(null, null, baseUrl);
+        }
+
+        const urlParams = new URLSearchParams(queryString);
+        const urlRoom = urlParams.get('room')
+        if(urlRoom != null && urlRoom.length == 4) {
+            document.querySelector('#roomCodeInput').value = urlRoom.toString().toUpperCase();
+            landingJoinGame();
+        }
+
+        // PREVENT ACCIDENTAL REFRESH/EXIT
+        window.addEventListener('beforeunload', function (e) {
+            if (isInGame) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        // MENU - HOST GAME
+        function landingHostGame() {
+            document.querySelector(".landingWrapper").style.display = 'none';
+            document.querySelector(".menuWrapper").style.display = 'flex';
+            document.querySelector('#hostGameGroup').style.display = 'flex';
+            document.querySelector('#joinGameGroup').style.display = 'none';
+        }
+        // MENU - JOIN GAME
+        function landingJoinGame() {
+            document.querySelector(".landingWrapper").style.display = 'none';
+            document.querySelector(".menuWrapper").style.display = 'flex';
+            document.querySelector('#hostGameGroup').style.display = 'none';
+            document.querySelector('#joinGameGroup').style.display = 'flex';
+        }
+        // MENU - BACK TO MENU
+        function returnToLanding() {
+            document.getElementById('usernameInputHost').value = '';
+            document.getElementById('roomCodeInput').value = '';
+            document.getElementById('usernameInput').value = '';
+            document.querySelector(".menuWrapper").style.display = 'none';
+            document.querySelector(".landingWrapper").style.display = 'flex';
+        }
+
+        // HOST CREATES NEW ROOM
+        function createNewRoom() {
+            hostUsername = document.getElementById('usernameInputHost').value.replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '');
+            if (hostUsername != "") {
+                myUsername = hostUsername;
+                let result = '';
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                for (let i = 0; i < 4; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                socket.emit('createNewLobby', { roomCode: result.toUpperCase(), hostName: hostUsername });
+            } else {
+                alertPopup("Invalid host username!");
+            }
+        }
+
+        // PLAYER TRIES TO JOINS ROOM
+        function attemptJoinroom() {
+            let tempRoomCode = document.getElementById('roomCodeInput').value.toString().replace(/\s/g, '').toUpperCase();
+            if (tempRoomCode.length == "4") {
+                myUsername = document.getElementById('usernameInput').value.replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '');
+                if (myUsername != "") {
+                    socket.emit('join', { roomCode: tempRoomCode, username: myUsername });
+                } else {
+                    alertPopup("Invalid username!");
+                }
+            } else {
+                alertPopup("Invalid room code!");
+            }
+        }
+        // PLAYER JOINS ROOM
+        function confirmedJoinLobby(code, username) {
+            myUsername = username;
+            document.querySelector('.menuWrapper').style.display = 'none';
+            document.querySelector('.joinedroomPleaseWaitWrapper').style.display = 'flex';
+            document.querySelector('#nameOfroomWaiting').innerText = code;
+            roomCode = code;
+            document.querySelector('#everyoneInButtonContainer').style.visibility = "hidden";
+            isInGame = true;
+            document.title = "Impostierlist (" + roomCode + ")";
+        }
+
+        // PLAYER LEAVES GAME
+        function leaveGame() {
+            isInGame = false;
+            window.location.reload();
+        }
+
+        // PLAY AGAIN, SAME LOBBY
+        function playAgainSameLobby() {
+            socket.emit('playAgainSameLobby', { roomCode: roomCode });
+        }
+
+        // EVERYONE IN, CONTINUE
+        function everyoneIn(personalTrue) {
+            socket.emit('everyoneInGo', { roomCode: roomCode, personal: personalTrue.toString() });
+        }
+
+        // ADD CUSTOM NAME (PERSONALIZED MODE)
+        function addCustomName() {
+            const input = document.getElementById('customNameInput');
+            const name = input.value.trim().replace(/[^a-zA-Z0-9 ]/g, ''); 
+            if (name.length > 0) {
+                socket.emit('addCustomName', { roomCode: roomCode, name: name });
+                input.value = ''; 
+            }
+        }
+
+        // REMOVE CUYSTOM NAME
+        function removeCustomName(nameToRemove) {
+            socket.emit('removeCustomName', { roomCode: roomCode, name: nameToRemove });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // enter key for custom name input
+            document.getElementById("customNameInput").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    addCustomName();
+                }
+            });
+        });
+
+        // COPY ROOM URL TO CLIPBOARD
+        function copyRoomURL() {
+            let baseUrl = window.location.href.split('?')[0]; 
+            let thisRoomCode = document.querySelector('#nameOfroomWaiting').innerText;
+            let newUrl = baseUrl + '?room=' + thisRoomCode.toLowerCase(); 
+            alertPopup("Room code link copied to clipboard!");
+            navigator.clipboard.writeText(newUrl);
+        }
+
+        // RESET TIER LIST TO ORIGINAL STATE
+        function resetForNextRound() {
+            for (let i = 1; i <= 7; i++) {
+                const wordElement = document.getElementById('draggableWord' + i);
+                const originalHolder = document.querySelector('#srR' + i + ' .optionHolder');
+                if (wordElement && originalHolder) {
+                    originalHolder.appendChild(wordElement);
+                }
+                
+                const srL = document.querySelector('#srL' + i);
+                const srR = document.querySelector('#srR' + i);
+                if (srL) srL.style.display = 'flex';
+                if (srR) srR.style.display = 'flex';
+            }
+            
+            document.querySelector('#votingResultsWrapper').style.display = 'none';
+            document.querySelector('#tierListActionButtons').style.display = 'flex';
+            document.querySelector('#tierListSubmittedWait').style.display = 'none';
+            document.querySelector('#preventDrag').style.display = 'none';
+            document.querySelector('#tierListToSort').style.display = ''; 
+            document.querySelector('#tierListWrapper').style.width = ''; 
+            
+            document.querySelector('#realPromptLabel').style.display = 'inline-block';
+            document.querySelector('#realPromptText').style.top = '';
+            document.querySelector('#realPromptText').style.color = '';
+            document.querySelector('#realPromptRevealContainer').style.height = '';
+            
+            document.querySelector('#tierResultsWrapper').style.display = 'none';
+            document.querySelector('#tierResultsTitle').style.display = 'block'; 
+            document.querySelector('#tierResultsTitle').style.opacity = '0%';
+            
+            // reset border/colors
+            document.querySelector('#tierBox').style.border = '';
+            document.querySelector('#tierResultsTitle').style.color = '';
+
+            const voteBtn = document.querySelector('#voteNameAsImpostor');
+            voteBtn.disabled = true;
+            voteBtn.style.opacity = '0.5';
+            voteBtn.style.cursor = 'default';
+            voteBtn.style.display = 'inline-block';
+            document.querySelector('#votedConfirmationText').style.display = 'none';
+            document.querySelector('#waitingForHostText').style.display = 'none';
+        }
+
+        // shuffle array in place
+        function shuffle(array) {
+            let currentIndex = array.length,  randomIndex;
+            while (currentIndex > 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+        
+        // new tierlist data
+        function newTierListData(prompt, answers) {
+            document.querySelector('.joinedroomPleaseWaitWrapper').style.display = 'none';
+            document.querySelector('#tierListWrapper').style.display = 'flex';
+            
+            shuffle(answers);
+            for (let i = 0; i < answers.length; i++) {
+                document.querySelector(`#draggableWord${i + 1}`).innerText = answers[i];
+            }
+            
+            document.querySelector('#tierListTopBar').innerText = prompt;
+            canDrag = true;
+            numOfAnswers = answers.length;
+
+            if(answers.length < 4) { document.querySelector('#srL4').style.display = 'none'; document.querySelector('#srR4').style.display = 'none'; }
+            if(answers.length < 5) { document.querySelector('#srL5').style.display = 'none'; document.querySelector('#srR5').style.display = 'none'; }
+            if(answers.length < 6) { document.querySelector('#srL6').style.display = 'none'; document.querySelector('#srR6').style.display = 'none'; }
+            if(answers.length < 7) { document.querySelector('#srL7').style.display = 'none'; document.querySelector('#srR7').style.display = 'none'; }
+        }
+
+        let rankingsData;
+        let viewedLists = new Set();
+        function allListsSubmitted(rankings, prompt) {
+            rankingsData = rankings; 
+            const firstPlayerName = Object.keys(rankings)[0];
+            const firstPlayerAnswers = rankings[firstPlayerName];
+            votingForName = firstPlayerName;
+
+            viewedLists = new Set();
+            viewedLists.add(firstPlayerName);
+            checkVoteButtonReady();
+
+            document.querySelector('#realPromptText').innerText = prompt;
+            updateShownList(firstPlayerName, firstPlayerAnswers);
+
+            document.querySelector('#tierListWrapper').style.display = 'none';
+            document.querySelector('#tierResultsWrapper').style.display = 'flex';
+            document.querySelector('#tierResults').style.opacity = '0%';
+            document.querySelector('#tierResultsTitle').style.opacity = '0%';
+
+            setTimeout(showAllSubmittedLists, 3000);
+        }
+
+        // check if voting button is ready to enable
+        function checkVoteButtonReady() {
+            const totalPlayers = Object.keys(rankingsData).length;
+            const voteBtn = document.querySelector('#voteNameAsImpostor');
+            if (viewedLists.size >= totalPlayers) {
+                voteBtn.disabled = false;
+                voteBtn.style.opacity = '1';
+                voteBtn.style.cursor = 'pointer';
+            } else {
+                voteBtn.disabled = true;
+                voteBtn.style.opacity = '0.5';
+                voteBtn.style.cursor = 'default';
+            }
+        }
+
+        // ALL LISTS ARE SUBMITTED, CONTINUE
+        function showAllSubmittedLists() {
+            document.querySelector('#realPromptLabel').style.display = 'none';
+            document.querySelector('#realPromptText').style.top = 0;
+            document.querySelector('#realPromptText').style.color = "white";
+            document.querySelector('#tierResults').style.opacity = '100%';
+            document.querySelector('#tierResultsTitle').style.opacity = '100%';
+            document.querySelector('#realPromptRevealContainer').style.height = 'auto';
+        }
+
+        // SHOW/UPDATE A SUBMITTED TIER LIST
+        function updateShownList(name, answers) {
+            document.querySelector('#voteForName').innerText = name;
+            document.querySelector('#playerListName').innerText = name;
+
+            let pColor = playerColors[name] || 'white';
+            document.querySelector('#tierBox').style.border = 'solid 4px ' + pColor;
+            document.querySelector('#tierResultsTitle').style.color = pColor;
+
+            document.querySelector('#tierBoxRowAnswer1').innerText = answers[0];
+            document.querySelector('#tierBoxRowAnswer2').innerText = answers[1];
+            document.querySelector('#tierBoxRowAnswer3').innerText = answers[2];
+            
+            if (answers.length > 3) { document.querySelector('#tierBoxRowAnswer4').innerText = answers[3]; document.querySelector('#tierBoxRow4').style.display = 'flex'; } else { document.querySelector('#tierBoxRow4').style.display = 'none'; }
+            if (answers.length > 4) { document.querySelector('#tierBoxRowAnswer5').innerText = answers[4]; document.querySelector('#tierBoxRow5').style.display = 'flex'; } else { document.querySelector('#tierBoxRow5').style.display = 'none'; }
+            if (answers.length > 5) { document.querySelector('#tierBoxRowAnswer6').innerText = answers[5]; document.querySelector('#tierBoxRow6').style.display = 'flex'; } else { document.querySelector('#tierBoxRow6').style.display = 'none'; }
+            if (answers.length > 6) { document.querySelector('#tierBoxRowAnswer7').innerText = answers[6]; document.querySelector('#tierBoxRow7').style.display = 'flex'; } else { document.querySelector('#tierBoxRow7').style.display = 'none'; }
+        }
+
+        // CHANGE TO NEXT/PREVIOUS PLAYERS TIER LIST
+        function changeTierList(num) {
+            const playerNames = Object.keys(rankingsData);
+            const currentPlayerIndex = playerNames.indexOf(votingForName);
+            let nextPlayerIndex = currentPlayerIndex + num;
+
+            if (nextPlayerIndex >= playerNames.length) nextPlayerIndex = 0;
+            else if (nextPlayerIndex < 0) nextPlayerIndex = playerNames.length - 1;
+
+            const nextPlayerName = playerNames[nextPlayerIndex];
+            updateShownList(nextPlayerName, rankingsData[nextPlayerName]);
+            votingForName = nextPlayerName;
+            viewedLists.add(nextPlayerName);
+            checkVoteButtonReady();
+        }
+
+        // VOTE FOR THE CURRENT TIER LIST PLAYER AS IMPOSTOR
+        function voteForUser() {
+            socket.emit('userVotingFor', { roomCode: roomCode, votingFor: votingForName });
+            document.querySelector('#voteNameAsImpostor').style.display = 'none';
+            const confirmText = document.querySelector('#votedConfirmationText');
+            confirmText.innerText = "You voted for " + votingForName + "!";
+            confirmText.style.display = 'block';
+        }
+
+        // CUSTOM POPUP ALERT
+        function alertPopup(message) {
+            var popup = document.createElement('div');
+            popup.innerHTML = message;
+            popup.style.position = 'fixed';
+            popup.style.top = '30px'; 
+            popup.style.left = '50%';
+            popup.style.textAlign = 'center';
+            popup.style.background = 'var(--bg-panel)';
+            popup.style.padding = '10px 20px';
+            popup.style.border = '2px solid var(--accent)';
+            popup.style.borderRadius = '8px';
+            popup.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+            popup.style.zIndex = '9999';
+            popup.style.fontFamily = "cursive"; 
+            popup.style.opacity = '0';
+            popup.style.transform = 'translate(-50%, 20px)';
+            popup.style.transition = 'opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+            popup.style.width = '20%';
+            if (window.matchMedia("(orientation: portrait)").matches) popup.style.width = '70%';
+
+            document.body.appendChild(popup);
+            setTimeout(() => { popup.style.opacity = '1'; popup.style.transform = 'translate(-50%, 0)'; }, 10);
+            setTimeout(() => { popup.style.transition = 'opacity 1s ease-in, transform 1s ease-in'; popup.style.opacity = '0'; popup.style.transform = 'translate(-50%, -10px)'; }, 2000);
+            setTimeout(() => { if (document.body.contains(popup)) document.body.removeChild(popup); }, 3000); 
+        }
+        
+        // RESET TIER LIST ITEMS
+        function resetTierList() {
+            if (!canDrag) return; 
+            for (let i = 1; i <= numOfAnswers; i++) {
+                const wordElement = document.getElementById('draggableWord' + i);
+                const originalHolder = document.querySelector('#srR' + i + ' .optionHolder');
+                if (wordElement && originalHolder) originalHolder.appendChild(wordElement);
+            }
+        }
+
+        // DRAG LOGIC
+        document.addEventListener("DOMContentLoaded", function() {
+            var draggableWords = document.querySelectorAll(".draggableWord");
+            var optionHolders = document.querySelectorAll(".optionHolder");
+            var submitButton = document.getElementById("submitTierList");
+            let activeDragElement = null;
+            let dragClone = null;
+
+            function startDrag(e) {
+                if(!canDrag) return;
+                if (e.type === 'mousedown') e.preventDefault(); 
+                activeDragElement = e.target;
+                const rect = activeDragElement.getBoundingClientRect();
+                dragClone = activeDragElement.cloneNode(true);
+                dragClone.style.position = "absolute";
+                dragClone.style.zIndex = "9999";
+                dragClone.style.opacity = "1";
+                dragClone.style.pointerEvents = "none"; 
+                dragClone.style.width = rect.width + "px";
+                dragClone.style.height = rect.height + "px";
+                dragClone.style.margin = "0"; 
+                document.body.appendChild(dragClone);
+                activeDragElement.style.opacity = "0.3"; 
+                moveDrag(e);
+            }
+
+            function moveDrag(e) {
+                if(!activeDragElement || !canDrag) return;
+                e.preventDefault(); 
+                let pageX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+                let pageY = e.type.includes('mouse') ? e.pageY : e.touches[0].pageY;
+                if(dragClone) {
+                    dragClone.style.left = pageX - (dragClone.offsetWidth / 2) + "px";
+                    dragClone.style.top = pageY - (dragClone.offsetHeight / 2) + "px";
+                }
+            }
+
+            function endDrag(e) {
+                if(!activeDragElement || !canDrag) return;
+                dragClone.remove();
+                activeDragElement.style.opacity = "1";
+                let clientX = e.type.includes('mouse') ? e.clientX : e.changedTouches[0].clientX;
+                let clientY = e.type.includes('mouse') ? e.clientY : e.changedTouches[0].clientY;
+                let target = document.elementFromPoint(clientX, clientY);
+                while (target && !target.classList.contains("optionHolder")) {
+                    target = target.parentNode;
+                    if(target === document.body || !target) break; 
+                }
+
+                if (target && target.classList.contains("optionHolder")) {
+                    var replacedElement = target.querySelector(".draggableWord");
+                    if (replacedElement && replacedElement !== activeDragElement) {
+                        var parent = activeDragElement.parentNode;
+                        var replacedParent = replacedElement.parentNode;
+                        parent.removeChild(activeDragElement);
+                        replacedParent.removeChild(replacedElement);
+                        parent.appendChild(replacedElement);
+                        target.appendChild(activeDragElement);
+                    } else if (!replacedElement) { 
+                        var parent = activeDragElement.parentNode;
+                        parent.removeChild(activeDragElement);
+                        target.appendChild(activeDragElement);
+                    }
+                }
+                activeDragElement = null; 
+                dragClone = null;
+            }
+
+            draggableWords.forEach(function(word) {
+                word.removeAttribute('draggable'); 
+                word.addEventListener("mousedown", startDrag);
+                word.addEventListener("touchstart", startDrag, {passive: false});
+            });
+
+            document.addEventListener("mousemove", moveDrag, {passive: false});
+            document.addEventListener("mouseup", endDrag);
+            document.addEventListener("touchmove", moveDrag, {passive: false});
+            document.addEventListener("touchend", endDrag);
+
+            submitButton.addEventListener("click", function() {
+                var sortedWords = [];
+                optionHolders.forEach(function(holder) {
+                    var draggableWord = holder.querySelector(".draggableWord");
+                    if (draggableWord) {
+                        sortedWords.push(draggableWord.textContent.trim());
+                    } else {
+                        sortedWords.push("");
+                    }
+                });
+                sortedWords = sortedWords.slice(0, numOfAnswers);
+                
+                if (sortedWords.includes("")) {
+                    alertPopup("No empty tier rows!");
+                } else {
+                    document.querySelector('#tierListActionButtons').style.display = 'none'; 
+                    document.querySelector('#tierListSubmittedWait').style.display = 'flex';
+                    canDrag = false;  
+                    document.querySelector('#preventDrag').style.display = 'flex';  
+                    document.querySelector('#tierListToSort').style.display = 'none';
+                    if (window.matchMedia("(orientation: portrait)").matches || window.innerWidth <= 768) {
+                        document.querySelector('#tierListWrapper').style.width = '90%';
+                    } else {
+                        document.querySelector('#tierListWrapper').style.width = '30%';
+                    }
+                    socket.emit('submitTierListAnswer', { roomCode: roomCode, submittedList: sortedWords });
+                }
+            });
+        });
+
+        // SHOW VOTING RESULTS
+        function showVotingResults(guesses, impostor, roundScores = {}, totalScores = {}, scoreBreakdowns = {}, round = 1, fakePrompt = "") {
+            document.querySelector('#tierResultsWrapper').style.display = 'none';
+            document.querySelector('#tierResultsTitle').style.display = 'none';            
+            document.querySelector('#votingResultsWrapper').style.display = 'flex';
+
+            // build scoreboard
+            let scoreboardHTML = "";
+            let sortedPlayers = Object.keys(totalScores).sort((a, b) => totalScores[b] - totalScores[a]);
+            
+            sortedPlayers.forEach((player, index) => {
+                let roundPts = roundScores[player];
+                let ptsText = roundPts > 0 ? `<span style="color: var(--color-g);">+${roundPts}</span>` : `<span style="color: var(--text-muted);">+0</span>`;
+                
+                let breakdownHTML = "";
+                if (scoreBreakdowns[player] && scoreBreakdowns[player].length > 0) {
+                    let breakdownString = scoreBreakdowns[player].join(', ');
+                    breakdownHTML = `<div style="font-size: 0.85rem; color: var(--color-g); opacity: 0.8; margin-top: 4px;">↳ ${breakdownString}</div>`;
+                }
+
+                let highlightMe = player === myUsername ? 'border: solid 2px var(--accent);' : '';
+                let pColor = playerColors[player] || 'white';
+
+                scoreboardHTML += `<div style="background-color: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; margin-bottom: 5px; ${highlightMe}">
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>${index + 1}. <span style="color: ${pColor};">${player}</span></strong>
+                        <span>${totalScores[player]} pts (${ptsText})</span>
+                    </div>
+                    ${breakdownHTML}
+                </div>`;
+            });
+            document.querySelector('#scoreboardList').innerHTML = scoreboardHTML;
+
+            // show vote breakdown
+            let voteCounts = {};
+            let voteBreakdownHTML = "";
+            for (const [voter, votedFor] of Object.entries(guesses)) {
+                voteCounts[votedFor] = (voteCounts[votedFor] || 0) + 1;
+                let isCorrect = votedFor === impostor;
+                let rowStyle = isCorrect ? 'color: var(--color-g);' : '';
+                
+                let voterColor = playerColors[voter] || 'white';
+                let votedForColor = playerColors[votedFor] || 'white';
+                
+                voteBreakdownHTML += `<div style="background-color: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; ${rowStyle}"><strong><span style="color: ${voterColor};">${voter}</span></strong> voted for <strong><span style="color: ${votedForColor};">${votedFor}</span></strong></div>`;
+            }
+            document.querySelector('#voteBreakdownList').innerHTML = voteBreakdownHTML;
+
+            // who won
+            let maxVotes = 0;
+            let votedOut = [];
+            for (const [player, votes] of Object.entries(voteCounts)) {
+                if (votes > maxVotes) {
+                    maxVotes = votes;
+                    votedOut = [player];
+                } else if (votes === maxVotes) {
+                    votedOut.push(player); 
+                }
+            }
+
+            let totalVoters = Object.keys(guesses).length;
+            let impostorVotes = voteCounts[impostor] || 0;
+            let unanimousCapture = (impostorVotes === totalVoters - 1); // everyone but the impostor
+            let impostorCaptured = (votedOut.length === 1 && votedOut[0] === impostor);
+
+            let winnerText = "";
+            let revealText = `The impostor was ${impostor}!`;
+
+            if (unanimousCapture) {
+                winnerText = "<span style='color: var(--color-g);'>UNANIMOUS CAPTURE</span>";
+                revealText += " Every single player voted for them.";
+            } else if (impostorCaptured) {
+                winnerText = "<span style='color: var(--color-g);'>MAJORITY CAPTURE</span>";
+                revealText += " The group successfully voted them out.";
+            } else if (impostorVotes > 0) {
+                winnerText = "<span style='color: var(--color-y);'>NARROW ESCAPE</span>";
+                let wrongGuess = votedOut.length === 1 ? votedOut[0] : "a tie";
+                revealText += ` Not enough players voted out the impostor.`;
+            } else {
+                winnerText = "<span style='color: var(--color-r);'>FLAWLESS EVASION</span>";
+                let wrongGuess = votedOut.length === 1 ? votedOut[0] : "a tie";
+                revealText += ` Not a single person suspected them.`;
+            }
+
+            document.querySelector('#winnerAnnouncement').innerHTML = winnerText;
+            document.querySelector('#impostorReveal').innerText = revealText;
+            
+            document.querySelector('#impostorPromptText').innerText = `"${fakePrompt}"`;
+
+            // play again button for host
+            const playAgainBtn = document.querySelector('#playAgainButton');
+            const waitText = document.querySelector('#waitingForHostText');
+
+            if (meHost) {
+                playAgainBtn.style.display = 'block';
+                waitText.style.display = 'none';
+
+                if (round < 3) {
+                    playAgainBtn.innerText = "NEXT ROUND";
+                    playAgainBtn.onclick = function() { socket.emit('nextRound', { roomCode: roomCode }); };
+                } else {
+                    playAgainBtn.innerText = "FINISH GAME";
+                    playAgainBtn.onclick = function() { socket.emit('finishGame', { roomCode: roomCode }); };
+                }
+            } else {
+                playAgainBtn.style.display = 'none';
+                waitText.style.display = 'block';
+            }
+        }
+
+    </script>
+</body>
+
+</html>

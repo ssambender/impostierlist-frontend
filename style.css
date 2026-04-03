@@ -1,0 +1,587 @@
+/* =========================================
+   GLOBAL VARIABLES & RESET
+========================================= */
+@font-face {
+    font-family: 'New Era Casual';
+    src: url('New Era Casual Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    /* Tier list colors */
+    --color-r: #FF7F7F; /* S - Red */
+    --color-o: #FFBF7F; /* A - Orange */
+    --color-y: #FEFF7E; /* B - Yellow */
+    --color-g: #BEFE7F; /* C - Green */
+    --color-b: #7FBFFF; /* D - Blue */
+    --color-i: #807FFF; /* E - Indigo */
+    --color-v: #FE7FFE; /* F - Violet */
+
+    /* Theme colors */
+    --bg-dark: #12121a;
+    --bg-panel: #1e1e2f;
+    --text-main: #f1f2f6;
+    --text-muted: #a4b0be;
+    --accent: #60487a;
+    --accent-hover: #7b5da1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   TYPOGRAPHY & BUTTONS
+========================================= */
+button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    font-family: 'New Era Casual', cursive;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
+    user-select: none;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* Secondary back button */
+.backButton {
+    background-color: transparent;
+    color: var(--text-muted);
+    box-shadow: none;
+    margin-top: 5px;
+    padding: 10px 15px;
+    margin-left: 5px;
+    font-size: 1rem;
+
+    letter-spacing: -0.1em;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.backButton:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    transform: none;
+    box-shadow: none;
+}
+
+input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--accent);
+    color: white;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    text-transform: uppercase;
+}
+
+input:focus {
+    border-color: #a385cc;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+#roomCodeInput, #usernameInput {
+    letter-spacing: 0.04em;
+}
+
+
+#customNameInput {
+    width: fit-content !important;
+    border: none;
+    padding: 1px !important;
+    font-size: 1rem !important;
+    text-transform: none !important;
+}
+#customNamesSection button {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+    color: rgb(117 117 117);
+    font-size: 1rem !important;
+    font-weight: normal !important;
+}
+#customNamesSection button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+    transform: none;
+    box-shadow: none;
+}
+#customNamesList span {
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    /* text-transform: capitalize !important; */
+}
+
+
+/* =========================================
+   LAYOUT WRAPPERS & MENUS
+========================================= */
+.landingWrapper, .menuWrapper, .joinedroomPleaseWaitWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.menuWrapper {
+    display: none;
+    position: relative;
+}
+
+.imgWrapper img, .menuGroup img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.menuGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.hostjoinbutton {
+    padding: 12px 80px;
+    user-select: none;
+}
+
+.menuGroupInputLabel {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+.menuGroupInputLabelText {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   LOBBY / WAITING ROOM
+========================================= */
+.joinedroomPleaseWaitWrapper {
+    display: none;
+    text-align: center;
+}
+
+#nameOfroomWaiting {
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
+#playersInLobby {
+    margin-top: 30px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+#inLobbyLabel {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#playersInLobbyList {
+    font-family: 'New Era Casual', cursive !important;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+#playersInLobbyList span {
+    font-family: 'New Era Casual', cursive !important;
+}
+
+/* =========================================
+   TIER LIST MAKER SCREEN
+========================================= */
+#tierListWrapper {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1000px;
+    margin-top: 20px;
+}
+
+#tierListContainer {
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#preventDrag {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10;
+    display: none;
+}
+
+#tierListTopBar {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    font-family: 'New Era Casual', cursive;
+    letter-spacing: 0.07em;
+}
+
+#tierListSortingSec {
+    display: flex;
+    gap: 20px;
+}
+
+.tierListSortingHalf {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sortingRow {
+    display: flex;
+    height: 60px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    overflow: hidden;
+}
+#srL1 { border: 2px solid var(--color-r); }
+#srL2 { border: 2px solid var(--color-o); }
+#srL3 { border: 2px solid var(--color-y); }
+#srL4 { border: 2px solid var(--color-g); }
+#srL5 { border: 2px solid var(--color-b); }
+#srL6 { border: 2px solid var(--color-i); }
+#srL7 { border: 2px solid var(--color-v); }
+
+.tierLetter {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--bg-panel);
+
+    font-family: 'New Era Casual', cursive;
+    letter-spacing: 0.07em;
+    padding-left: 4px;
+
+    user-select: none;
+}
+
+.optionHolder {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+    border: 3px dashed rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+
+.optionHolder:empty {
+    background-color: rgba(255,255,255,0.02);
+}
+
+.draggableWord {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: grab;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.draggableWord:active {
+    cursor: grabbing;
+    background-color: #34495e;
+}
+
+#tierListActionButtons {
+    margin-top: 30px !important;
+}
+
+#submitTierList {
+    width: 100%;
+    max-width: 400px;
+    font-size: 1.5rem;
+}
+
+#tierListSubmittedWait {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   RESULTS & VOTING SCREEN
+========================================= */
+#tierResultsWrapper {
+    display: none;
+    width: 100%;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#tierResultsTitle {
+    font-size: 1.75rem;
+    text-decoration: underline;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    font-family: 'New Era Casual', cursive;
+    letter-spacing: 0.1em;
+    transition: opacity 1s ease;
+    opacity: 0;
+}
+
+#tierResultsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+#realPromptRevealContainer {
+    text-align: center;
+    margin-bottom: 30px;
+    height: 0;
+    transition: height 0.5s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+#realPromptLabel {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--color-r);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#realPromptText {
+    font-size: 2rem;
+    position: relative;
+    font-family: 'New Era Casual', cursive;
+    letter-spacing: 0.05em;
+}
+
+#tierResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transition: opacity 1s ease;
+}
+
+#tierBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+    background-color: var(--bg-panel);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+    user-select: none;
+}
+
+#tierBoxInner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tierBoxRow {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 50px;
+}
+
+.tierBoxRowLet {
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.6);
+}
+
+.tierBoxRow span {
+    padding-left: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#voteNameAsImpostor {
+    margin-top: 30px;
+    background-color: var(--color-r);
+    min-width: 50%;
+}
+
+#voteNameAsImpostor:hover {
+    background-color: #dd6969;
+}
+
+/* =========================================
+   FOOTER & MISC
+========================================= */
+#footerSB {
+    position: fixed;
+    bottom: 20px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+#footerSB:hover {
+    opacity: 1;
+}
+
+#footerSB img {
+    height: 30px;
+}
+
+#sendGameDataButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    padding: 8px 15px;
+    opacity: 0.2;
+}
+
+#sendGameDataButton:hover {
+    opacity: 1;
+}
+
+/* Responsive tweaks */
+@media all and (orientation: portrait) {
+    .landingWrapper, .menuWrapper, .joinedroomPleaseWaitWrapper {
+        max-width: 90%;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px 16px;
+    }
+
+    #footerSB {
+        bottom: 6px;
+    }
+
+    #tierListActionButtons {
+        margin-bottom: 42px;
+    }
+
+    #tierBox {
+        width: 90%;
+    }
+
+    #voteNameAsImpostor {
+        min-width: 60%;
+    }
+
+    #realPromptText {
+        font-size: 1.2rem;
+        position: relative;
+        font-family: 'New Era Casual', cursive;
+        letter-spacing: 0.03em;
+    }
+
+    #realPromptRevealContainer {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+}
+@media (max-width: 768px) {
+    #tierListSortingSec {
+        flex-direction: column;
+    }
+    
+    .tierLetter {
+        width: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .sortingRow {
+        height: 50px;
+    }
+}
