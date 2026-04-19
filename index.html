@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Impostierlist</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" sizes="32x32" href="favicon.png">
@@ -12,7 +12,7 @@
 
 <body>
     
-    <div id="connectionOverlay">
+    <div id="connectionOverlay" style="display: none; opacity: 0; transition: opacity 0.5s ease; position: fixed; inset: 0; z-index: 9999; flex-direction: column; align-items: center; justify-content: center;">
         <h2>Establishing a connection to the server...</h2>
         <p style="color: var(--text-muted);">The server is waking up from sleep. Hang tight!</p>
         <div id="countdownText">30</div>
@@ -274,29 +274,44 @@
         // const socket = io('http://localhost:8080');
 
         let countdownValue = 30;
+        let timer;
         const overlay = document.getElementById('connectionOverlay');
         const countdownDisplay = document.getElementById('countdownText');
 
-        const timer = setInterval(() => {
-            countdownValue--;
-            countdownDisplay.innerText = countdownValue;
+        let showOverlayTimeout = setTimeout(() => {
+            overlay.style.display = 'flex'; 
             
-            if (countdownValue <= 0) {
-                clearInterval(timer);
-                countdownDisplay.innerText = "Checking...";
-                // if after 30s we still aren't connected give a manual retry tip
-                setTimeout(() => {
-                    if (!socket.connected) {
-                        countdownDisplay.innerHTML = "<span style='font-size:1rem; color: var(--color-r);'>Still waiting... Try refreshing if this takes much longer.</span>";
-                    }
-                }, 5000);
-            }
-        }, 1000);
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+            }, 50);
+
+            timer = setInterval(() => {
+                countdownValue--;
+                countdownDisplay.innerText = countdownValue;
+                
+                if (countdownValue <= 0) {
+                    clearInterval(timer);
+                    countdownDisplay.innerText = "Checking...";
+                    setTimeout(() => {
+                        if (!socket.connected) {
+                            countdownDisplay.innerHTML = "<span style='font-size:1rem; color: var(--color-r);'>Still waiting... Try refreshing if this takes much longer.</span>";
+                        }
+                    }, 5000);
+                }
+            }, 1000);
+        }, 1500);
 
         socket.on('connect', () => {
             console.log('Connected to the server');
-            clearInterval(timer);
-            overlay.style.display = 'none';
+            
+            clearTimeout(showOverlayTimeout); 
+            
+            clearInterval(timer); 
+            
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
         });
 
         socket.on('connect_error', (err) => {
@@ -753,7 +768,7 @@
             popup.style.borderRadius = '8px';
             popup.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
             popup.style.zIndex = '9999';
-            popup.style.fontFamily = "'New Era Casual', cursive";
+            popup.style.fontFamily = "cursive"; 
             popup.style.opacity = '0';
             popup.style.transform = 'translate(-50%, 20px)';
             popup.style.transition = 'opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
