@@ -7,7 +7,7 @@
 <p align="center">
 Tierlist making party game!
  <br>
- <a href="https://ssambender.github.io/impostierlist-frontend/"><strong>Try it Online »</strong></a>
+ <a href="https://impostierlist.com"><strong>Try it Online »</strong></a>
 </p>
 
 ___
