@@ -48,6 +48,39 @@ body {
     justify-content: center;
     min-height: 100svh;
     overflow-x: hidden;
+    background-image: url('bg-squiggles.png');
+}
+
+.color-reveal-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0; 
+    background-image: url('bg-squiggles-color.png');
+    --mask-x: -100px; 
+    --mask-y: -100px;
+    --mask-size: 200px;
+    -webkit-mask-image: radial-gradient(
+        circle at var(--mask-x) var(--mask-y),
+        black 0%,
+        transparent var(--mask-size)
+    );
+    mask-image: radial-gradient(
+        circle at var(--mask-x) var(--mask-y),
+        black 0%,
+        transparent var(--mask-size)
+    );
+    transition: opacity 0.2s ease;
+    opacity: 0; 
+}
+.color-reveal-overlay.active {
+    opacity: 1;
+}
+
+@media all and (orientation: portrait) {
+    body, .color-reveal-overlay {
+        background-size: 100%;
+    }
 }
 
 /* =========================================
@@ -324,6 +357,7 @@ input:focus {
     border-radius: 8px;
     font-family: 'New Era Casual', cursive;
     letter-spacing: 0.07em;
+    user-select: none;
 }
 
 #tierListSortingSec {
@@ -445,6 +479,7 @@ input:focus {
     letter-spacing: 0.1em;
     transition: opacity 1s ease;
     opacity: 0;
+    user-select: none;
 }
 
 #tierResultsContainer {
@@ -477,6 +512,7 @@ input:focus {
     position: relative;
     font-family: 'New Era Casual', cursive;
     letter-spacing: 0.05em;
+    user-select: none;
 }
 
 #tierResults {
