@@ -18,6 +18,8 @@
         <div id="countdownText">30</div>
     </div>
 
+    <div class="color-reveal-overlay"></div>
+
     <div id="footerSB"><a href="https://sambender.net" target="_blank" style="font-family: 'New Era Casual', cursive; color: #C9C9E4; z-index: 0;">Sam Bender 2026</a></div>
 
     <div class="landingWrapper" style="display: flex; z-index: 1;">
@@ -256,7 +258,7 @@
     <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
     <script>
         let roomCode = '';
-        let meHost = false;         
+        let meHost = false;
         let myUsername = "Guest";
         let hostUsername = "Host";
         let isInGame = false;      
@@ -277,6 +279,36 @@
         let timer;
         const overlay = document.getElementById('connectionOverlay');
         const countdownDisplay = document.getElementById('countdownText');
+
+
+        // hover color bg
+        document.addEventListener("DOMContentLoaded", () => {
+            const revealOverlay = document.querySelector('.color-reveal-overlay');
+            function updateMaskPosition(clientX, clientY) {
+                revealOverlay.style.setProperty('--mask-x', `${clientX}px`);
+                revealOverlay.style.setProperty('--mask-y', `${clientY}px`);
+            }
+            window.addEventListener('mousemove', (e) => {
+                revealOverlay.classList.add('active');
+                updateMaskPosition(e.clientX, e.clientY);
+            });
+            document.addEventListener('mouseleave', () => {
+                revealOverlay.classList.remove('active');
+            });
+            window.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    revealOverlay.classList.add('active');
+                    updateMaskPosition(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+            window.addEventListener('touchmove', (e) => {
+                updateMaskPosition(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+            window.addEventListener('touchend', () => {
+                revealOverlay.classList.remove('active');
+            });
+        });
+
 
         // Hide empty sorting rows if on mobile
         function updateSortingRowsVisibility() {
