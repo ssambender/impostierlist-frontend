@@ -18,9 +18,9 @@
         <div id="countdownText">30</div>
     </div>
 
-    <div id="footerSB"><a href="https://sambender.net" target="_blank" style="font-family: 'New Era Casual', cursive; color: #C9C9E4;">Sam Bender 2026</a></div>
+    <div id="footerSB"><a href="https://sambender.net" target="_blank" style="font-family: 'New Era Casual', cursive; color: #C9C9E4; z-index: 0;">Sam Bender 2026</a></div>
 
-    <div class="landingWrapper" style="display: flex;">
+    <div class="landingWrapper" style="display: flex; z-index: 1;">
         <div class="imgWrapper">
             <img src="impostierlistLong.png">
         </div>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="menuWrapper">
+    <div class="menuWrapper" style="z-index: 1;">
         <div class="menuGroup" id="hostGameGroup">
             <img src="hostGameLong.png">
             <div class="menuGroupInputLabel">
@@ -40,7 +40,7 @@
             <button id="createLobbyButton" onclick="createNewRoom()" style="font-family: 'New Era Casual', cursive;">CREATE LOBBY</button>
             <button class="backButton" onclick="returnToLanding()"><——</button>
         </div>
-        <div class="menuGroup" id="joinGameGroup">
+        <div class="menuGroup" id="joinGameGroup" style="z-index: 1;">
             <img src="joinGameLong.png">
             <div class="menuGroupInputLabel">
                 <span class="menuGroupInputLabelText" style="font-family: 'New Era Casual', cursive;">Room Code</span>
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div id="tierListWrapper">
+    <div id="tierListWrapper" style="z-index: 1;">
         <div id="tierListContainer">
             <div id="preventDrag"></div>
             <div id="tierListTopBar">
@@ -125,7 +125,7 @@
         <div id="tierListSubmittedWait" style="display: none;">Tier list submitted, sit tight...</div>
     </div>
 
-    <div id="tierResultsWrapper">
+    <div id="tierResultsWrapper" style="z-index: 1;">
         <div id="tierResultsContainer">
             <div id="realPromptRevealContainer">
                 <span id="realPromptLabel">REAL PROMPT:</span>
@@ -173,7 +173,7 @@
         </div>
     </div>
 
-    <div id="votingResultsWrapper" style="display: none; flex-direction: column; align-items: center; width: 100%; max-width: 800px; margin-top: 40px; background-color: var(--bg-panel); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div id="votingResultsWrapper" style="display: none; z-index: 1; flex-direction: column; align-items: center; width: 100%; max-width: 800px; margin-top: 40px; background-color: var(--bg-panel); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         <h1 id="winnerAnnouncement" style="font-size: 2.5rem; margin-bottom: 10px; text-align: center;"></h1>
         <h2 id="impostorReveal" style="color: var(--color-r); margin-bottom: 30px; text-align: center;"></h2>
         
@@ -196,7 +196,7 @@
         <span id="waitingForHostText" style="display: none; color: var(--text-muted); font-weight: bold;">Waiting for host to continue...</span>
     </div>
 
-    <div id="finalResultsWrapper" style="display: none; flex-direction: column; align-items: center; width: 100%; max-width: 800px; margin-top: 40px; background-color: var(--bg-panel); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div id="finalResultsWrapper" style="display: none; z-index: 1; flex-direction: column; align-items: center; width: 100%; max-width: 800px; margin-top: 40px; background-color: var(--bg-panel); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         <h1 id="finalWinnerName" style="font-size: 2.5rem; margin-bottom: 10px; text-align: center; color: var(--color-g);"></h1>
         <h2 style="color: var(--text-muted); margin-bottom: 30px; text-align: center;">FINAL SCORES</h2>
         
@@ -214,7 +214,7 @@
         <span id="finalWaitingText" style="display: none; color: var(--text-muted); font-weight: bold; margin-top:15px;">Waiting for host to continue...</span>
     </div>
 
-    <div class="joinedroomPleaseWaitWrapper">
+    <div class="joinedroomPleaseWaitWrapper" style="z-index: 1;">
         <span id="nameOfroomWaiting" style="font-family: 'New Era Casual', cursive;"></span>
         <span style="color: #60487a; font-family: 'New Era Casual', cursive;">Joined room, please wait...</span>
         <div id="playersInLobby">
