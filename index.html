@@ -278,6 +278,30 @@
         const overlay = document.getElementById('connectionOverlay');
         const countdownDisplay = document.getElementById('countdownText');
 
+        // Hide empty sorting rows if on mobile
+        function updateSortingRowsVisibility() {
+            const isMobile = window.innerWidth <= 768 || window.matchMedia("(orientation: portrait)").matches;
+
+            for (let i = 1; i <= numOfAnswers; i++) {
+                const srR = document.getElementById('srR' + i);
+                const holder = srR ? srR.querySelector('.optionHolder') : null;
+
+                if (srR && holder) {
+                    const hasWord = holder.querySelector('.draggableWord') !== null;
+
+                    if (isMobile && !hasWord) {
+                        srR.style.display = 'none';
+                    } else {
+                        srR.style.display = 'flex';
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (isInGame) updateSortingRowsVisibility();
+        });
+
         let showOverlayTimeout = setTimeout(() => {
             overlay.style.display = 'flex'; 
             
@@ -660,6 +684,8 @@
             if(answers.length < 5) { document.querySelector('#srL5').style.display = 'none'; document.querySelector('#srR5').style.display = 'none'; }
             if(answers.length < 6) { document.querySelector('#srL6').style.display = 'none'; document.querySelector('#srR6').style.display = 'none'; }
             if(answers.length < 7) { document.querySelector('#srL7').style.display = 'none'; document.querySelector('#srR7').style.display = 'none'; }
+            
+            updateSortingRowsVisibility();
         }
 
         let rankingsData;
@@ -790,6 +816,7 @@
                 const originalHolder = document.querySelector('#srR' + i + ' .optionHolder');
                 if (wordElement && originalHolder) originalHolder.appendChild(wordElement);
             }
+            updateSortingRowsVisibility();
         }
 
         // DRAG LOGIC
@@ -858,6 +885,8 @@
                 }
                 activeDragElement = null; 
                 dragClone = null;
+                
+                updateSortingRowsVisibility();
             }
 
             draggableWords.forEach(function(word) {
