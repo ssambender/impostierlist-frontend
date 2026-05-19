@@ -1,7 +1,7 @@
 <br>
 
 <p align="center">
- <img src="https://github.com/ssambender/impostierlist-frontend/blob/main/impostierlistLong.png?raw=true" alt="Impostierlist Logo" height="125">
+ <img src="impostierlistLong.png" alt="Impostierlist Logo" height="125">
 </p>
 
 <p align="center">
